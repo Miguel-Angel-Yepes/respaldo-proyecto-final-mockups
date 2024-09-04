@@ -8,7 +8,7 @@ const api = express.Router();
 
 api.post('/product', [md_auth.asureAuth, md_upload], ProductController.createProduct);
 api.get('/product/:id', ProductController.getProduct);
-api.get('/products', ProductController.getProducts);
+api.get('/product', ProductController.getProducts);
 api.patch('/product/:id', [md_auth.asureAuth, md_upload], ProductController.updateProduct);
 api.delete('/product/:id', [md_auth.asureAuth], ProductController.deleteProduct);
 

@@ -1,0 +1,8 @@
+.ui.tab.segment {
+    height: calc(100vh - 200px);
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+}

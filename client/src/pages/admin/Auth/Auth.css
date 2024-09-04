@@ -1,0 +1,10 @@
+.auth{
+    background-color: #0ba69e;
+    min-height: 100vh;
+    background-position: center;
+    background-size: contain;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 100px;
+}

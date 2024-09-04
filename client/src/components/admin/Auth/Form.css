@@ -1,0 +1,30 @@
+.auth__toggle {
+    background: none;
+    border: none;
+    color: rgb(85, 85, 245);
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: inherit;
+    padding: 0;
+    text-decoration: none;
+    margin-left: 5px;
+}
+
+.logo{
+  width: 150px;
+  margin: 0 auto;
+}
+
+.form{
+  width: 500px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px !important;
+  margin-bottom: 100px;
+}
+
+.register-form__error{
+  text-align: center;
+    color: #9f3a38;
+    font-weight: bold;
+}
