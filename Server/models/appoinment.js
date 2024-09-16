@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2';
 
 const AppoinmentSchema = new mongoose.Schema({
     user: {
@@ -10,18 +11,35 @@ const AppoinmentSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    description: {
+    animal: { // perro o gato
         type: String,
         required: true
     },
-    acceptedByAdmin: {
-        type: Boolean,
-        default: false
+    size: {
+        type: String,
+        required: true
+    },
+    petName: {
+        type: String,
+        required: true
+    },
+    appoinmentType: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String
     },
     active: {
         type: Boolean,
         default: true
+    },
+    isDone: {
+        type: Boolean,
+        default: false
     }
 });
 
-module.exports = mongoose.model("Appoinment", AppoinmentSchema);
+AppoinmentSchema.plugin(mongoosePaginate);
+
+export default mongoose.model("Appoinment", AppoinmentSchema);

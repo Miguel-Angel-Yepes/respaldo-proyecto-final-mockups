@@ -1,0 +1,107 @@
+.ui.basic.segment{
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+  
+  .pushable>.pusher.dimmed:after{
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+  }
+  
+  .ui.segment{
+    border: 0 !important;
+    border-radius: 0 !important;
+  }
+  
+  
+  .ui.right.sidebar{
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+  }
+
+
+  .sidebarPushable{
+    position: fixed !important;
+     top: 0px !important;
+     right: 0px !important;
+     Height: 100vh !important;
+     width: 100vw !important;
+     background: transparent !important;
+    }
+    
+    .modalCartHeader{
+        width: 100%;
+        background-color: #009688;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 25px 10px;
+        color: white;
+    }
+    
+    .modalCartHeader div{
+        margin-left: 20%;
+        display: flex;
+    }
+    
+    .modalCartFooter{
+        width: 100%;
+        background-color: #009688;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        color: white;
+    }
+    
+    .modalCartFooter div{
+        width: 100%;
+        padding: 10px 25px;
+        padding-bottom: 0px !important;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .a{
+        position: fixed !important;
+    }
+    
+    .paymentButton{
+        margin-bottom: 10px !important;
+        border-radius: 20px !important;
+        color: black !important;
+        font-size: 15px !important;
+        width: calc(100% - 50px);
+        background-color: white !important;
+    }
+    
+    
+    .cartItemContainer {
+        flex-grow: 1; /* Permite que el contenedor ocupe todo el espacio disponible */
+        overflow-y: auto; /* Habilita el scroll cuando sea necesario */
+        padding: 10px 25px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px; /* Espacio entre los items */
+      }
+    
+.carrito1{
+  /* position: absolute !important;
+  top: 0 !important;
+  right: 0 !important; */
+  /* display: block !important; */
+  display: none !important;
+}
+
+.ui.labeled.icon.button>.icon:after, .ui.labeled.icon.button>.icon:before, .ui.labeled.icon.buttons>.button>.icon:after, .ui.labeled.icon.buttons>.button>.icon:before {
+        margin-top: 0 !important;
+  }

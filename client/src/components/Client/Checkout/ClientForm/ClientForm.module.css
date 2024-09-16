@@ -1,0 +1,36 @@
+.clientForm{
+    width: 100% !important;
+    margin-bottom: 0 !important;
+}
+
+.clientFormP{
+    display: flex;
+    margin-bottom: 15px;
+    gap: 5px;
+}
+
+.clientFormP div{
+    background-color: #009688;
+    padding: 3px;
+    color: white;
+    font-size: 0.8rem;
+    border-radius: 100%;
+    width: 35px;
+    height: 35px;
+}
+
+.clientFormP div p{
+    font-size: rem;
+    margin-bottom: 0 !important;
+    text-align: center;
+}
+
+.clientForm input {
+    width: 100% !important;
+    box-sizing: border-box; /* Asegura que el padding no afecte el tamaño del input */
+}
+
+/* Asegura que los campos de Form.Group también ocupen el 100% del ancho */
+.clientForm .field {
+    width: 100% !important;
+}

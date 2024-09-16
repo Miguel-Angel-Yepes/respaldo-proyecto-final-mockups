@@ -1,0 +1,21 @@
+.checkoutData{
+    background-color: white;
+    width: 50%;
+    margin-left: 5%;
+    padding: 20px;
+    border-radius: 25px;
+}
+
+@media (max-width: 700px) {
+    .checkoutData{
+        width: 100%;
+        padding: 20px;
+        margin-left: 0 !important;
+    }
+}
+
+@media (max-width: 400px) {
+    .checkoutData{
+        padding: 10px;
+    }
+}

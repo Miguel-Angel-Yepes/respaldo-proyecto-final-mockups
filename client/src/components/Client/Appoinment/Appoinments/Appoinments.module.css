@@ -1,0 +1,46 @@
+.formContainer {
+  display: flex; /* Flexbox para centrar */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  min-height: 100vh; /* Ocupa toda la altura de la ventana */
+  padding: 20px; /* Espaciado alrededor del formulario */
+  box-sizing: border-box; /* Incluye el padding en el tamaño total */
+}
+
+.formWrapper {
+  max-width: 400px; /* Ancho máximo del formulario */
+  width: 100%; /* Ancho completo en dispositivos pequeños */
+  background-color: #fff; /* Fondo blanco para el formulario */
+  padding: 20px; /* Espaciado interno */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.formTitle {
+  text-align: center; /* Título centrado */
+  margin-bottom: 20px; /* Margen inferior */
+  font-size: 1.5em; /* Tamaño de fuente más grande */
+}
+
+.formElement {
+  margin-bottom: 15px; /* Margen inferior entre los elementos del formulario */
+}
+
+.submitButton {
+  margin-top: 20px; /* Margen superior para separar el botón de los demás elementos */
+}
+
+.formContainer{
+  background-color: #009688;
+}
+
+.formElement {
+  margin-bottom: 20px;
+}
+
+input[type="date"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}

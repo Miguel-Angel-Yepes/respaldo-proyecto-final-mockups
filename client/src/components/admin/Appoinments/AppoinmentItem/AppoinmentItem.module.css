@@ -1,0 +1,61 @@
+.item {
+    display: flex; /* Layout en fila */
+    flex-direction: row; /* Disposición en dos columnas: información y botones */
+    align-items: center; /* Alinear verticalmente los elementos */
+    justify-content: space-between; /* Separar la información y los botones */
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.title {
+    margin-bottom: 10px;
+    font-size: 27px;
+    font-weight: bold;
+    color: #009688;
+}
+
+.info {
+    flex: 1; /* Ocupa el espacio disponible */
+    margin-right: 20px; /* Espacio entre la información y los botones */
+}
+
+.actions {
+    display: flex;
+    gap: 10px; /* Espacio entre los botones */
+}
+
+.button {
+    position: relative; /* Necesario para la posición del tooltip */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button .icon {
+    margin: 0; /* Asegurar que el icono esté centrado */
+}
+
+.tooltip {
+    visibility: hidden; /* Ocultar el tooltip por defecto */
+    width: 80px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%; /* Mostrar el tooltip arriba del botón */
+    left: 50%;
+    margin-left: -40px; /* Centrar el tooltip */
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 12px;
+}
+
+.button:hover .tooltip {
+    visibility: visible; /* Mostrar el tooltip al hacer hover */
+    opacity: 1; /* Animación de opacidad */
+}

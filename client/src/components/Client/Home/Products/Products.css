@@ -1,0 +1,198 @@
+.ui.basic.segment{
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+.pushable>.pusher.dimmed:after{
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+.ui.segment{
+  border: 0 !important;
+  border-radius: 0 !important;
+}
+
+
+.ui.right.sidebar{
+  padding: 0 !important;
+  margin: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+.products{
+    background-color: #009688;
+}
+
+.products-filters{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    margin: 40px 0;
+}
+
+.products-filters__order{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+
+.products__filters__order__list{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+@media (min-width: 800px) {
+  .filter__button__product.carrito{
+    margin-right: 40px !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .products__filters__order__list{
+    flex-direction: column;
+  }
+
+  .ui.labeled.icon.button, .ui.labeled.icon.buttons .button{
+    display: flex;
+    align-items: end;
+  }
+
+  .ui.labeled.icon.button>.icon:after, .ui.labeled.icon.button>.icon:before, .ui.labeled.icon.buttons>.button>.icon:after, .ui.labeled.icon.buttons>.button>.icon:before {
+    margin-top: 20px;
+  }
+
+
+  .products-filters{
+    padding-right: 60px;
+  }
+
+  .products-filters__order{
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .carrito {
+    display: none !important;
+  }
+}
+
+.products__filters__order__list p{
+    margin: 0 !important;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.filter__button__product{
+    background-color: transparent !important;
+    color: white !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.filter__button__product .icon {
+  background: none !important;  /* Elimina el fondo */
+  box-shadow: none !important;  /* Elimina cualquier sombra */
+}
+
+
+
+.products__filter__order{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.list-courses__pagination{
+  margin-bottom: 60px !important;
+}
+
+/* ---- */
+
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 0 4rem;
+  }
+  
+  @media (min-width: 768px) {
+    .product-grid {
+      grid-template-columns: repeat(3, 1fr); /* 3 columns on medium screens */
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .product-grid {
+      grid-template-columns: repeat(4, 1fr); /* 4 columns on large screens */
+    }
+  }
+
+  .ui.button:not(.icon)>.icon:not(.button):not(.dropdown){
+    margin: 0 !important;
+  }
+
+  .ui.labeled.icon.button, .ui.labeled.icon.buttons .button {
+    padding-right: 0 !important;
+  }
+
+  .form.ui.form.login, .form.ui.form.register{
+    margin-bottom: 0 !important;
+  }
+  
+  @media (max-width: 550px) {
+
+    .product-grid {
+      grid-template-columns: repeat(1, 1fr); /* 3 columns on medium screens */
+    }
+
+    .products-filters{
+      justify-content: center;
+    }
+    
+    .products-filters{
+      padding-right: 40px !important;
+  }
+
+  .ui.labeled.icon.button, .ui.labeled.icon.buttons .button{
+    padding-left: 60px !important;
+  }
+
+    .products__filters__order__list p {
+      display: none;
+    }
+    
+    .ordenar-dropdown  {
+      width: auto !important;
+      padding-right: 30px !important;
+      min-width: 0 !important;
+    }
+
+    .ui.labeled.icon.button, .ui.labeled.icon.buttons .button{
+      display: flex;
+      align-items: center;
+    }
+  
+    .ui.labeled.icon.button>.icon:after, .ui.labeled.icon.button>.icon:before, .ui.labeled.icon.buttons>.button>.icon:after, .ui.labeled.icon.buttons>.button>.icon:before {
+      margin-top: 0;
+    }
+
+
+
+  }
+
+  

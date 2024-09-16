@@ -1,0 +1,123 @@
+.main-box {
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    flex-wrap: wrap;
+    text-align: center; /* Asegura que el texto esté centrado dentro del contenedor */
+}
+
+.image-container-act {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 33vw;
+    margin-bottom: 20px !important  ;
+}
+
+.client-menu__Image {
+    max-width: 150px;
+    display: block; /* Asegura que la imagen se comporte como un bloque */
+}
+
+.footer-copyright {
+    margin-top: 10px;
+}
+
+.email-address,
+.hour-phone {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center; /* Centra los elementos internos */
+    margin: 0 20px; /* Agrega margen lateral para separación entre columnas */
+    flex: 1; /* Permite que estas secciones se expandan igualmente */
+}
+
+.email-address > div,
+.hour-phone > div {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    align-items: center; /* Centra los elementos internos */
+}
+
+h4 {
+    font-size: 20px;
+    color: #1C345C;
+    margin: 0;
+}
+
+h5 {
+    font-size: 16px;
+    color: #333;
+    margin: 0;
+}
+
+
+.copy {
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .main-box {
+        flex-direction: column; /* Cambia la dirección del flex a columna en móviles */
+        align-items: center; /* Centra los elementos en dispositivos móviles */
+        justify-content: center;
+    }
+
+    .image-container {
+        max-width: 100%; /* Asegura que la imagen y el copyright ocupen todo el ancho disponible */
+    }
+
+    .email-address,
+    .hour-phone {
+        width: 100%;
+        max-width: 400px;
+        align-items: center; /* Centra los elementos internos */
+    }
+
+    .client-menu__Image {
+        margin-bottom: 10px; /* Ajusta el margen inferior en dispositivos móviles */
+    }
+
+    .footer-copyright {
+        margin-top: 10px; /* Ajusta el margen superior para dispositivos móviles */
+    }
+
+    .email-address,
+.hour-phone {
+    margin: 0;
+}
+}
+
+.client-menu{
+    background-color: #009688;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.client-menu__Button{
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center;
+    background-color: transparent !important;
+    color: white !important;
+}
+
+.client-menu__Button__Icon {
+    font-size: 30px !important;
+    font-weight: lighter !important;
+}
+
+
+.client-menu__Image{
+    width: 150px;
+}

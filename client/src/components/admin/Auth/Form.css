@@ -25,6 +25,11 @@
 
 .register-form__error{
   text-align: center;
-    color: #9f3a38;
-    font-weight: bold;
+  color: #9f3a38;
+  font-weight: bold;
+  font-size: 15px !important;
 }
+/* 
+p{
+
+} */

@@ -1,0 +1,54 @@
+.itemContainer {
+    background-color: white;
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    gap: 20px; /* Espacio entre los elementos */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añade un leve sombreado */
+    cursor: pointer;
+}
+
+.itemContainer img {
+    width: 80px; /* Ajusta el tamaño de la imagen */
+    height: 80px;
+    border-radius: 10px;
+    object-fit: cover; /* Para que la imagen no se distorsione */
+}
+
+.itemDetails {
+    flex-grow: 1; /* Permite que esta sección se expanda */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.itemDetails h2 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.priceInputContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre el precio y el input */
+}
+
+.priceInputContainer p {
+    font-size: 16px;
+    margin: 0;
+}
+
+.priceInputContainer input {
+    width: 70px; /* Tamaño del input */
+    text-align: center;
+    padding: 5px;
+}
+
+.itemContainer .icon {
+    font-size: 24px; /* Tamaño del ícono de la papelera */
+    cursor: pointer;
+    color: #ff4d4d !important; /* Color rojo para el ícono */
+}

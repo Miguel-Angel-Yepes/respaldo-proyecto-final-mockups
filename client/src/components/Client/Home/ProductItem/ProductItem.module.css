@@ -1,0 +1,142 @@
+.courseItemInfo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.8rem 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.5rem;
+  background-color: white;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  max-width: 130px;
+  height: 100%;
+  max-height: 130px;
+}
+
+.productImage {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 0.25rem;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 101%;
+  height: 101%;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 0.5rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  z-index: 1;
+}
+
+.discountBanner{
+  position: absolute;
+  top: 20%;
+  left: 0px;
+  z-index: 1;
+}
+
+.courseItemInfo:hover .overlay {
+  opacity: 1; 
+}
+
+.cartIcon {
+  font-size: 2rem;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.courseItemInfo:hover .cartIcon {
+  opacity: 1;
+}
+
+.productName, .productPrice {
+  text-align: center;
+}
+
+.productName {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+}
+
+.productPrice {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+/* Responsive styles */
+@media (min-width: 768px) {
+  .imageContainer {
+      max-width: 120px;
+      max-height: 120px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .imageContainer {
+      max-width: 150px;
+      max-height: 150px;
+  }
+}
+
+.discountPriceContainer{
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.discountPriceContainer p {
+  margin: 0;
+}
+
+.discountPriceContainer p:first-child{
+  text-decoration: line-through;
+  font-size: 1.2rem;
+}
+
+.discountP{
+  color: #009688;
+  font-weight: bold;
+  text-align: center;
+}
+
+.marginBottom {
+  margin-bottom: 25px; 
+}
+
+@media (max-width: 768px) {
+  .discountPriceContainer{
+    flex-direction: column;
+  }
+
+  /* .courseItemInfo {
+    min-width: 100px;
+  } */
+  
+}
+
+@media (max-width: 550px) {
+
+
+}

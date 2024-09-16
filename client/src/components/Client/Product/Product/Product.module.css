@@ -1,0 +1,191 @@
+p{
+    margin-bottom: 10px !important;
+}
+
+.productContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 15%;
+    padding: 20px;
+    padding-bottom: 80px !important;
+    background-color: #009688;
+    flex-wrap: wrap;
+}
+
+.productCard {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 400px;
+}
+
+.productImage {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.productInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    max-width: 100%;
+    color: white;
+}
+
+.productTitle {
+    font-weight: bold;
+    font-size: calc(1.5em + 1vw); 
+    color: white;
+}
+
+.quantitySelector {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.quantityInput {
+    width: 60px;
+    text-align: center;
+    -moz-appearance: textfield;
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-weight: bolder;
+    font-size: calc(16px + 0.5vw);
+}
+
+.quantityInput::-webkit-outer-spin-button,
+.quantityInput::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.quantityButton {
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 50%;
+    color: white;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+}
+
+.quantityButton:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.addToCartButton {
+    margin-top: 20px;
+    background-color: white !important;
+    color: #000 !important;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Media queries para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .productContainer {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .productCard {
+        max-width: 80%;
+    }
+    
+    .productInfo {
+        text-align: center;
+        align-items: center;
+        max-width: 100%;
+    }
+    
+    .quantitySelector {
+        gap: 0;
+    }
+    
+    .quantityButton {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .quantityInput {
+        width: 50px;
+    }
+}
+
+  #carrito {
+    position: absolute !important;
+    top: 70px !important; /* Ajusta según sea necesario para que aparezca debajo del menú */
+    right: 40% !important; /* Ajusta según sea necesario para la alineación */
+  }
+
+  @media (max-width: 768px){
+    #carrito {
+        position: absolute !important;
+        top: 40px !important; /* Ajusta según sea necesario para que aparezca debajo del menú */    
+        right: 35% !important; /* Ajusta según sea necesario para la alineación */
+    }
+
+    #icon{
+        font-size: 30px !important;
+    }
+    @media (max-width: 600px){
+        #carrito { 
+            right: 45% !important; 
+            top: 50px !important;
+        }
+
+        #carrito span  { 
+            font-size: 0px;  
+        }
+
+
+    }
+
+    
+}
+
+.modal {
+    width: auto !important;
+    display: flex !important;
+    padding-bottom: 0 !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .ui.button:not(.icon)>.icon:not(.button):not(.dropdown){
+    margin: 0 !important;
+  }
+  
+  @media (max-width: 550px) {
+    .modal {
+      max-width: calc(100% - 50px) !important;
+    }
+  }
+  
+  @media (min-width: 700px) {
+    .menu-elements__Button__Carrito{
+      display: none !important;
+    }
+  
+    .menu-elements__Button__Carrito + .menu-modal__divider{
+      display: none !important;
+    }
+  } 
+  

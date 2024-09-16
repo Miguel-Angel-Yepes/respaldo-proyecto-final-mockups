@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Tab, Button } from 'semantic-ui-react';
+import { Tab, Button, Icon } from 'semantic-ui-react';
 import { BasicModal } from '../../../components/Shared/BasicModal';
 import { ListProducts } from '../../../components/admin/Product';
+import { ProductForm } from '../../../components/admin/Product';
 import './Products.css';
 
-export function Products() {
+export function Products() { 
 
   const [showModal, setShowModal] = useState(false);
   const [reload, setReload] = useState(false);
@@ -35,16 +36,19 @@ export function Products() {
     <>
       <div className='products-page'>
         <div className='products-page__add'>
+
           <Button primary onClick={onOpenCloseModal}>
             Nuevo Producto
           </Button>
+
+          
         </div>
 
         <Tab menu={{ secondary: true}} panes={panes} />
       </div>
 
       <BasicModal show={showModal} close={onOpenCloseModal} title="Crear producto" >
-        <p>Formulario para crear productos</p>
+        <ProductForm onClose={onOpenCloseModal} onReload={onReload} />
       </BasicModal>
 
     </>

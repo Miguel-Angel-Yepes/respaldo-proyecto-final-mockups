@@ -6,7 +6,7 @@ import { useAuth } from '../hooks';
 
 export function AdminRouter() {
   
-  const { user } = useAuth();
+  const { user } = useAuth();  
 
   const loadLayout = (Layout, Page) =>{
     return (
@@ -18,7 +18,7 @@ export function AdminRouter() {
 
   return (
     <Routes>
-    {!user ? (
+    {!user || user.role==="user" ? (
       <Route path="/admin/*" element={<Auth />} />
     ) : (
       <>

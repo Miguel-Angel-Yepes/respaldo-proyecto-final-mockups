@@ -1,7 +1,7 @@
-const jwt = require("jsonwebtoken");
-const {JWT_SECRET_KEY} = require('../constants');
+import jwt from 'jsonwebtoken';
+import { JWT_SECRET_KEY } from '../constants.js';
 
-function createAccessToken(user) {
+export function createAccessToken(user) {
     const expToken = new Date();
     expToken.setHours(expToken.getHours() + 3);
 
@@ -10,13 +10,12 @@ function createAccessToken(user) {
         user_id: user._id,
         iat: Date.now(),
         exp: expToken.getTime(),
-    }
+    };
 
     return jwt.sign(payload, JWT_SECRET_KEY);
 }
 
-
-function createRefreshToken(user){
+export function createRefreshToken(user) {
     const expToken = new Date();
     expToken.setMonth(expToken.getMonth() + 1);
 
@@ -25,18 +24,11 @@ function createRefreshToken(user){
         user_id: user._id,
         iat: Date.now(),
         exp: expToken.getTime(),
-    }
+    };
 
     return jwt.sign(payload, JWT_SECRET_KEY);
 }
 
-
-function decoded(token) {
+export function decoded(token) {
     return jwt.decode(token, JWT_SECRET_KEY, true);
-}
-
-module.exports = {
-    createAccessToken,
-    createRefreshToken,
-    decoded
 }

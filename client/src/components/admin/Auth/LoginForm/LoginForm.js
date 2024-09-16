@@ -13,7 +13,9 @@ export function LoginForm(props) {
 
     const { login } = useAuth();
 
-    const { openRegister } = props;
+    const { openRegister, onOpenCloseLogin } = props;
+    const [error, setError] = useState("");
+
     
     const formik = useFormik({
       initialValues: initialValues(),
@@ -26,9 +28,11 @@ export function LoginForm(props) {
           authController.setAccessToken(response.access);
           authController.setRefreshToken(response.refresh);
 
-          login(response.access)
+          login(response.access);
+
+          onOpenCloseLogin()
         } catch (error) {
-            throw(error)
+          setError(error.msg);
         }
       }
     })
@@ -60,6 +64,9 @@ export function LoginForm(props) {
         >
             Entrar
         </Form.Button>
+
+        <p className='register-form__error'> {error} </p>
+
 
         <p> ¿No tienes una cuenta? 
             <button onClick={openRegister} className="auth__toggle">

@@ -1,0 +1,301 @@
+/* Estilos base */
+.client-menu {
+  width: 100%;
+  background-color: #009688;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Ajusta para que los elementos estén separados */
+  box-sizing: border-box;
+  padding: 0 20px;
+  position: relative;
+  z-index: 2; /* Asegura que el nav esté por debajo del modal */
+}
+
+.client-menu__Image {
+  width: 150px;
+  margin-right: 20px;
+  display: block; /* Hace que la imagen sea un bloque */
+  margin: 0 auto; /* Centra la imagen horizontalmente */
+}
+
+/* Estilos del buscador */
+.buscador {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centro del buscador */
+  margin: 0 20px; /* Añade margen para separar del logo */
+  width: 100%; /* Asegura que ocupe todo el ancho disponible */
+}
+
+.buscador__input {
+  width: 300px;
+  padding: 10px;
+  padding-right: 35px;
+  border: 2px solid #ddd;
+  border-radius: 25px;
+  background-color: #fff;
+  font-size: 16px;
+  outline: none;
+}
+
+.buscador__icon {
+  position: relative;
+  left: -30px;
+  color: #888;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Botones de menú para pantallas grandes */
+.menu-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Alinea los botones a la derecha */
+  gap: 15px;
+}
+
+/* Estilos para los botones */
+.menu-elements__Button {
+  color: white !important;
+  background-color: transparent !important;
+  border-radius: 20px !important;
+  border: 2px solid white !important;
+  margin: 0 10px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.menu-elements__Button__Login{
+  color: white !important;
+  background-color: transparent !important;
+  border: none;
+  text-decoration: none;
+  font-size: 20px !important;
+  transition: all 0.2s ease-in-out;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.menu-elements__Button__Carrito{
+  color: white !important;
+  background-color: transparent !important;
+  border: none;
+  text-decoration: none;
+  font-size: 20px !important;
+  transition: all 0.2s ease-in-out;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+.filter__button__product{
+  background-color: transparent !important;
+  color: white !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.filter__button__product .icon {
+  background: none !important;  /* Elimina el fondo */
+  box-shadow: none !important;  /* Elimina cualquier sombra */
+}
+
+
+
+
+.menu-elements__Button__Login p{
+  width: 90px;
+  font-size: 15px;
+}
+
+.menu-elements__Button__Carrito p{
+  width: 90px;
+  font-size: 15px;
+}
+
+.ui.button:not(.icon)>.icon:not(.button):not(.dropdown){
+  margin: 0 !important;
+}
+
+/* Estilos del menú modal */
+.menu-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 300px;
+  background-color: #009688;
+  display: flex;
+  align-items: start; /* Centra los elementos verticalmente */
+  justify-content: center; /* Centra los elementos horizontalmente */
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+  z-index: 9999; /* Encima de todo */
+  transition: transform 0.3s ease-in-out;
+}
+
+.menu-modal__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra los elementos horizontalmente */
+  width: 100%;
+  padding: 20px;
+}
+
+/* Estilos de los elementos del menú modal */
+.menu-modal__item {
+  width: 100%;
+  text-align: center; /* Centra el texto */
+  padding: 15px 0;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: transparent; /* Fondo transparente */
+  border: none; /* Sin bordes */
+  margin: 0; /* Sin margen */
+}
+
+.menu-modal__item:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Efecto hover */
+}
+
+/* Estilo de las líneas divisorias entre los recuadros */
+.menu-modal__divider {
+  width: 80%;
+  height: 1px;
+  background-color: white;
+  margin: 10px 0;
+}
+
+/* Botón de cierre del menú modal */
+.menu-modal__close {
+  margin-left: auto;
+  background-color: transparent;
+  color: white;
+  border: none;
+  font-size: 24px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  
+}
+
+.burguer {
+  display: none;
+}
+
+/* Mostrar botón hamburguesa en pantallas pequeñas */
+@media (max-width: 768px) {
+
+  .menu-elements__Button__Login{
+    font-size: 20px !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-weight: normal !important;
+  }
+
+  .menu-elements__Button__Carrito{
+    font-size: 20px !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-weight: normal !important;
+  }
+
+  .menu-buttons {
+    display: none;
+  }
+
+  .client-menu__Hamburger {
+    display: block;
+  }
+
+  .burguer {
+    display: block;
+  }
+
+  .buscador {
+    margin: 10px auto;
+    width: 80%; /* Disminuye el ancho al 80% */
+    max-width: 250px; /* Asegura que no sea mayor de 250px */
+  }
+
+  .client-menu__Image {
+    width: 120px; /* Disminuye menos el tamaño de la imagen */
+    margin: 0 auto; /* Centra la imagen */
+  }
+}
+
+@media (max-width: 576px) {
+  .client-menu__Image {
+    width: 140px; /* Imagen más grande para pantallas muy pequeñas */
+    margin: 0 auto; /* Centra la imagen */
+  }
+
+  .buscador__input {
+    width: 200px; /* Reduce más el tamaño de la barra de búsqueda */
+  }
+}
+
+/* Estilo para los enlaces en el menú modal */
+.menu-modal__item a {
+  color: white; /* Cambia el color del texto a blanco */
+  text-decoration: none; /* Quita el subrayado */
+  display: block; /* Asegura que el enlace ocupe todo el área del recuadro */
+  width: 100%;
+  height: 100%;
+}
+
+/* Estilo para el hover de los enlaces en el menú modal */
+.menu-modal__item a:hover {
+  color: white; /* Mantiene el color blanco al hacer hover */
+  text-decoration: none; /* Mantiene sin subrayado */
+}
+
+.client-menu__Hamburger-act,
+.menu-modal__close {
+    background-color: transparent !important; /* Fondo transparente */
+    color: white !important; /* Color del ícono blanco */
+    border: none; /* Elimina cualquier borde */
+    box-shadow: none; /* Elimina cualquier sombra */
+}
+
+.client-menu__Hamburger-act .icon,
+.menu-modal__close .icon {
+    color: white !important; /* Asegúrate de que el ícono sea blanco */
+}
+
+.client-menu__Hamburger-act:hover,
+.menu-modal__close:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo ligeramente gris al pasar el mouse (opcional) */
+}
+
+/* Asegúrate de que el modal tenga un tamaño adecuado y sea responsivo */
+.modal {
+  width: auto !important;
+  display: flex !important;
+  padding-bottom: 0 !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.ui.button:not(.icon)>.icon:not(.button):not(.dropdown){
+  margin: 0 !important;
+}
+
+@media (max-width: 550px) {
+  .modal {
+    max-width: calc(100% - 50px) !important;
+  }
+}
+
+@media (min-width: 700px) {
+  .menu-elements__Button__Carrito{
+    display: none !important;
+  }
+
+  .menu-elements__Button__Carrito + .menu-modal__divider{
+    display: none !important;
+  }
+}

@@ -1,8 +1,18 @@
+.products-page__add {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.products-page__add > .ui.button {
+    margin: 0;
+}
+
 .ui.tab.segment {
     height: calc(100vh - 200px);
     overflow-y: scroll;
-    &::-webkit-scrollbar {
-        display: none;
-    }
+}
 
+.ui.tab.segment::-webkit-scrollbar {
+    display: none;
 }

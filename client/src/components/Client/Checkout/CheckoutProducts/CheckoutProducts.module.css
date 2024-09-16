@@ -1,0 +1,33 @@
+.checkouProducts{
+    background-color: white !important;
+    width: 35%;
+    margin-right: 5%;
+    padding: 20px;
+    border-radius: 25px;
+}
+
+.checkouProductsChildren{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: clamp(1rem, 2vw, 1.7rem);
+}
+
+.checkouProductsChildren p{
+    font-size: clamp(1rem, 2vw, 1.7rem);
+}
+
+h2{
+    font-size: clamp(1.3rem, 2vw, 1.7rem);
+}
+
+@media (max-width: 700px) {
+    .checkouProducts{
+        width: 100%;
+        margin-right: 0px;
+    }
+}
+
+@media (max-width: 400px) {
+
+}

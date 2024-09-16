@@ -1,0 +1,109 @@
+    .client-menu{
+        background-color: #009688;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .client-menu__Button{
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center;
+        background-color: transparent !important;
+        color: white !important;
+    }
+
+    .client-menu h2 {
+        color: white;
+        font-size: 4.5rem; /* Tamaño del texto */
+        margin: 0;
+      }
+
+    .client-menu__Image {
+        width: 150px !important; /* Tamaño inicial del logo */
+        height: auto !important;
+        transition: width 0.3s ease; /* Transición suave al cambiar el tamaño */
+    }
+
+    @media (min-width: 768px){
+        .menu-elements__Button__Login{
+            margin-right: 20px  !important;
+          }
+    }
+
+    @media (max-width: 768px) {
+        .client-menu h2 {
+            color: white;
+            font-size: 2.5rem; /* Tamaño del texto */
+            margin: 0;
+          }
+    
+        .client-menu__Image {
+            width: 100px !important; /* Tamaño inicial del logo */
+            height: auto !important;
+            transition: width 0.3s ease; /* Transición suave al cambiar el tamaño */
+        }
+
+        .menu-elements__Button__Login p{
+            font-size: 1.0rem;
+            width: 8rem;
+          }
+
+    }
+
+    @media (max-width: 480px){
+    
+        
+
+        .menu-elements__Button__Login p{
+            font-size: 1.0rem;
+            width: 7rem;
+          }
+    }
+
+
+
+    .client-menu__Button__Icon {
+        font-size: 30px !important;
+        font-weight: lighter !important;
+    }
+
+
+    .client-menu__Image {
+        width: 150px; /* Tamaño inicial del logo */
+        height: auto;
+        transition: width 0.3s ease; /* Transición suave al cambiar el tamaño */
+      }
+
+    /* -------- */
+
+.menu-elements__Button__Login{
+    color: white !important;
+    background-color: transparent !important;
+    border: none;
+    text-decoration: none;
+    font-size: 20px !important;
+    transition: all 0.2s ease-in-out;
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center !important;
+    padding:  20px 0 !important;
+  }
+  .modal {
+    width: auto !important;
+    display: flex !important;
+    padding-bottom: 0 !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .ui.button:not(.icon)>.icon:not(.button):not(.dropdown){
+    margin: 0 !important;
+  }
+  
+  @media (max-width: 550px) {
+    .modal {
+      max-width: calc(100% - 50px) !important;
+    }
+  }

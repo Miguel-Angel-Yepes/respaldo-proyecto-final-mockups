@@ -21,7 +21,6 @@ export function RegisterForm(props) {
       validateOnChange: false,
       onSubmit: async (formValue ) => {
         try {
-          console.log(formValue)
           setError("");
           await authController.register(formValue);
           openLogin();

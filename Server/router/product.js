@@ -1,15 +1,16 @@
-const express = require('express');
-const multiparty = require('connect-multiparty');
-const ProductController = require('../controllers/product');
-const md_auth = require('../middlewares/authenticated');
+import express from 'express';
+import multiparty from 'connect-multiparty';
+import { asureAuth } from '../middlewares/authenticated.js'; // Importación nombrada
+import * as ProductController from '../controllers/product.js'; // Si el controlador sigue usando `module.exports`
+
 const md_upload = multiparty({ uploadDir: "./uploads/product" });
 
 const api = express.Router();
 
-api.post('/product', [md_auth.asureAuth, md_upload], ProductController.createProduct);
+api.post('/product', [asureAuth, md_upload], ProductController.createProduct);
 api.get('/product/:id', ProductController.getProduct);
 api.get('/product', ProductController.getProducts);
-api.patch('/product/:id', [md_auth.asureAuth, md_upload], ProductController.updateProduct);
-api.delete('/product/:id', [md_auth.asureAuth], ProductController.deleteProduct);
+api.patch('/product/:id', [asureAuth, md_upload], ProductController.updateProduct);
+api.delete('/product/:id', [asureAuth], ProductController.deleteProduct);
 
-module.exports = api;
+export default api;
