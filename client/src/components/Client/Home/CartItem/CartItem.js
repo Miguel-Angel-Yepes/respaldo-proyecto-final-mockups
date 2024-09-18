@@ -90,7 +90,7 @@ export function CartItem(props) {
               {item.productId.discount ? (
                 <p>{discountedPrice(item.productId.cantDiscount, item.productId.price)}</p>
               ) : (
-                <p>{item.productId.price * quantity}</p>
+                <p>${item.productId.price * quantity}</p>
               )}
   
               <Input

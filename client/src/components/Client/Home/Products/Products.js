@@ -142,7 +142,7 @@ export function Products(props) {
           <div className={styles.modalCartFooter}>
             <div>
               <p>Total estimado</p>
-              <p>${cartContent?.total}.00</p>
+              <p>${cartContent?.total}</p>
             </div>
 
             <Button className={styles.paymentButton} as="a" href='/checkout'>

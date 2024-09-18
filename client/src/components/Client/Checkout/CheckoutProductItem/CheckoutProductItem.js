@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import { ENV } from '../../../../utils';
 import { Image } from 'semantic-ui-react';
 import styles from './CheckoutProductItem.module.css';
 

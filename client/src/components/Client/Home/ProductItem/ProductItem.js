@@ -32,15 +32,15 @@ export function ProductItem(props) {
       {product.discount ? (
         <>
           <div className={styles.discountPriceContainer} > 
-            <p className={styles.productPrice}>${product.price}.00</p>
-            <p className={styles.productPrice}>${discountedPrice(product.cantDiscount, product.price)}.00</p>  
+            <p className={styles.productPrice}>${product.price}</p>
+            <p className={styles.productPrice}>${discountedPrice(product.cantDiscount, product.price)}</p>  
           </div>
           <p className={styles.discountP}>Producto con descuento</p>
         </>
       ) : (
         <div>
         <div className={styles.marginBottom}></div>
-        <p className={styles.productPrice}>${product.price}.00</p>  
+        <p className={styles.productPrice}>${product.price}</p>  
         <div className={styles.marginBottom}></div>
         </div>
       )}

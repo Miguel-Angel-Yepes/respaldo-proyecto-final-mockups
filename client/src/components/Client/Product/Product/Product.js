@@ -87,8 +87,6 @@ export function Product() {
   };
 
   const formattedPrice = `$${product.price.toLocaleString('en-US', {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2,
   })}`;
 
   const handleAddToCart = async () => {
@@ -139,8 +137,6 @@ export function Product() {
     const discountAmount = price * (discount / 100);
     const Price = price - discountAmount;
     const finalPrice =`$${Price.toLocaleString('en-US', {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
     })}`;
     return finalPrice;
   };
@@ -181,7 +177,7 @@ export function Product() {
           <div className={styles2.modalCartFooter}>
             <div>
               <p>Total estimado</p>
-              <p>${cartContent?.total}.00</p>
+              <p>${cartContent?.total}</p>
             </div>
 
             <Button className={styles2.paymentButton} as="a" href='/checkout'>
@@ -255,22 +251,20 @@ export function Product() {
         </Modal.Actions>
       </Modal>
 
-      <Modal open={showLogin} onClose={onOpenCloseLogin}>
-        <Modal.Content>
+      <Modal closeIcon open={showLogin} onClose={onOpenCloseLogin} className={styles.modal}>
+        <Modal.Content className={styles.modalContent}>
           {isLogin ? (
-            <LoginForm onOpenCloseLogin={onOpenCloseLogin} />
+            <LoginForm
+              openRegister={toggleForm}
+              onOpenCloseLogin={onOpenCloseLogin}
+            />
           ) : (
-            <RegisterForm onOpenCloseLogin={onOpenCloseLogin} />
+            <RegisterForm
+              openLogin={toggleForm}
+              onOpenCloseLogin={onOpenCloseLogin}
+            />
           )}
         </Modal.Content>
-        <Modal.Actions>
-          <div className={styles.loginActions}>
-            <p>
-              {isLogin ? "¿Aún no tienes cuenta?" : "¿Ya tienes cuenta?"}
-              <span onClick={toggleForm}>{isLogin ? " Regístrate" : " Inicia sesión"}</span>
-            </p>
-          </div>
-        </Modal.Actions>
       </Modal>
     </>
   );

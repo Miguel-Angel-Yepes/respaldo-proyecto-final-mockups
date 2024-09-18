@@ -1,0 +1,17 @@
+.postCheckoutPage{
+    display: flex;
+    width: 100%;
+    background-color: #009688;
+    padding: 100px 0;
+    gap: 5%;
+    min-height: 100vh;
+}
+
+@media (max-width: 700px) {
+    .postCheckoutPage{
+        padding: 50px 50px;
+        flex-direction: column;
+        align-items: center;
+        gap: 50px;
+    }
+}
