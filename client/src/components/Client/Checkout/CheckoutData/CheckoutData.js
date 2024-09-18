@@ -7,8 +7,9 @@ import styles from './CheckoutData.module.css';
 
 const checkoutController = new Checkout();
 
-export function CheckoutData() {
+export function CheckoutData(props) {
   
+  const { handleDeliveryState, setDeliveryMunicipality, deliveryState } = props;
   const { user } = useAuth();
   const [isClient, setIsClient] = useState(true);
 
@@ -35,7 +36,7 @@ export function CheckoutData() {
     {isClient ? (
         <ClientForm clientData={clientData} toggleClient={toggleClient} />
       ) : (
-        <DirectionForm directionData={directionData} />
+        <DirectionForm directionData={directionData} handleDeliveryState={handleDeliveryState} setDeliveryMunicipality={setDeliveryMunicipality} deliveryState={deliveryState} />
       )}
     </div>
   )

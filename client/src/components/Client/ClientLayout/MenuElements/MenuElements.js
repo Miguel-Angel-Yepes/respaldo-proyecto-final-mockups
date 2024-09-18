@@ -82,7 +82,7 @@ export function MenuElements({ onSearch, onOpenCloseCart,onReloadCart }) {
               }
             }}
           >
-            Citas
+            Peluquería
           </Button>
           <Button
             as="a"
@@ -149,7 +149,7 @@ export function MenuElements({ onSearch, onOpenCloseCart,onReloadCart }) {
                 }
               }}
             >
-              <a>Citas</a>
+              <a>Peluquería</a>
             </div>
 
             <div className={styles['menu-modal__divider']}></div>

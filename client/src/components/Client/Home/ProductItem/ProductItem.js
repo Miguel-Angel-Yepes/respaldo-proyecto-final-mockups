@@ -26,7 +26,7 @@ export function ProductItem(props) {
       </div>
       <p className={styles.productName}> {product.name} </p>  {/* Aplica la clase con styles */}
       <div className={styles.imageContainer}>  {/* Aplica la clase con styles */}
-        <Image src={`${ENV.BASE_PATH}/${product.images}`} className={styles.productImage} />  {/* Aplica la clase con styles */}
+        <Image src={product.images} className={styles.productImage} />  {/* Aplica la clase con styles */}
       </div>
 
       {product.discount ? (

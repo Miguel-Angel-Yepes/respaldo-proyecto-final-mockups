@@ -30,7 +30,7 @@ export function WebRouter() {
           </>
         ) : (
           <>
-          <Route path='/appoinments' element={loadLayout(ClientLayout, Appoinments, "Citas")} />
+          <Route path='/appoinments' element={loadLayout(ClientLayout, Appoinments, "Peluquería")} />
           <Route path='/checkout' element={loadLayout(ClientLayout, Checkout, "Pago")} />
           </>
         )}

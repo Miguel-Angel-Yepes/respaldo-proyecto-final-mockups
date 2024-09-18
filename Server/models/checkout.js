@@ -29,7 +29,8 @@ const CheckoutSchema = new mongoose.Schema({
         required: true
     },
     clientData: [ClientDataSchema],
-    clientDirection: [ClientDirectionSchema]
+    clientDirection: [ClientDirectionSchema],
+    delivery: Boolean,
 });
 
 export default mongoose.model('Checkout', CheckoutSchema);

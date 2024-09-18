@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Form, Dropdown } from 'semantic-ui-react';
+import { Form, Dropdown, ButtonOr, ButtonGroup, Button } from 'semantic-ui-react';
 import { useFormik } from 'formik';
 import { initialValues, validationSchema } from './DirectionForm.form';
 import { Checkout } from '../../../../api';
 import { useAuth } from '../../../../hooks';
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import { Cart, Preference } from '../../../../api';
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import styles from './DirectionForm.module.css';
+import '../../Contact/ContactApi/ContactApi.css'
+import './wallet.css';
 
 const cartController = new Cart();
 const preferenceController = new Preference();
@@ -16,17 +19,31 @@ export function DirectionForm(props) {
   initMercadoPago('APP_USR-0b0888c5-7a07-4b08-a4f7-d75309c1435f', { locale: 'es-CO' });
 
   const { user } = useAuth();
-  const { directionData } = props;
+  const { directionData, setDeliveryMunicipality, handleDeliveryState, deliveryState } = props; 
   const [cartContent, setCartContent] = useState(null);
   const [preferenceId, setPreferenceId] = useState(null);
   const [departmentOptions, setDepartmentOptions] = useState([]);
   const [municipalityOptions, setMunicipalityOptions] = useState([]);
   const [municipalityDisabled, setMunicipalityDisabled] = useState(true);
 
+  const containerStyle = {
+    width: '100%',
+    height: '100%',
+  };
+  
+  const center = {
+    lat: 6.3471929,
+    lng: -75.563069,
+  };
+    
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: 'AIzaSyAtCnsLPzLHTT6NU3rZZ2BsAYzmxmmNbeU',
+  });
+
   useEffect(() => {
     formik.setValues(initialValues(directionData));
 
-    // Si hay un departamento en directionData, cargar sus municipios
     if (directionData?.department) {
       const selectedDepartment = directionData.department;
       const selectedDepartmentOption = departmentOptions.find(opt => opt.value === selectedDepartment);
@@ -47,7 +64,6 @@ export function DirectionForm(props) {
     })();
   }, [user._id]);
 
-  // Obtener los departamentos
   useEffect(() => {
     const fetchDepartments = async () => {
       try {
@@ -67,7 +83,6 @@ export function DirectionForm(props) {
     fetchDepartments();
   }, []);
 
-  // Obtener las municipalidades según la clave del departamento
   const fetchMunicipalities = async (departmentKey) => {
     try {
       const response = await fetch(`https://api-colombia.com/api/v1/Department/${departmentKey}/cities`);
@@ -77,8 +92,8 @@ export function DirectionForm(props) {
         value: municipality.name,
         text: municipality.name,
       }));
-      setMunicipalityOptions(municipalityOptions); // Actualizar las opciones de municipios
-      setMunicipalityDisabled(false); // Habilitar el campo de municipio
+      setMunicipalityOptions(municipalityOptions);
+      setMunicipalityDisabled(false);
     } catch (error) {
       console.error('Error al obtener los municipios:', error);
     }
@@ -97,7 +112,12 @@ export function DirectionForm(props) {
     validateOnChange: false,
     onSubmit: async formValue => {
       try {
-        await checkoutController.addDirectionData(formValue, user._id);
+
+        const dataToSend = {
+          ...formValue,
+          delivery: deliveryState 
+        };
+        await checkoutController.addDirectionData(dataToSend, user._id);
         handleBuy();
       } catch (error) {
         console.log(error);
@@ -108,18 +128,34 @@ export function DirectionForm(props) {
   const handleDepartmentChange = (e, { value, options }) => {
     formik.setFieldValue('department', value);
 
-    // Obtener la clave (key) del departamento seleccionado
     const selectedDepartment = options.find(option => option.value === value);
     if (selectedDepartment) {
-      fetchMunicipalities(selectedDepartment.key); // Llamar a la función para obtener las municipalidades
-      setMunicipalityDisabled(false); // Habilitar el campo de municipio
+      fetchMunicipalities(selectedDepartment.key);
+      setMunicipalityDisabled(false);
     } else {
-      setMunicipalityDisabled(true); // Deshabilitar si no hay selección
+      setMunicipalityDisabled(true);
     }
   };
 
+  const handleMunicipalityChange = (e, { value }) => {
+    formik.setFieldValue('municipality', value);
+    setDeliveryMunicipality(value); // Llama a setDeliveryMunicipality aquí
+  };
+
   return (
-    <Form className={styles.directionForm} onSubmit={formik.handleSubmit}>
+    <>
+    <ButtonGroup size='large'>
+      <Button onClick={() => handleDeliveryState(true)}>
+        Envío a domicilio
+      </Button>
+      <ButtonOr />
+      <Button onClick={() => handleDeliveryState(false)}>
+        Retirar en tienda
+      </Button>
+    </ButtonGroup>
+
+    {deliveryState? (
+      <Form className={styles.directionForm} onSubmit={formik.handleSubmit}>
       <div className={styles.directionFormP}>
         <div>
           <p>2</p>
@@ -127,7 +163,6 @@ export function DirectionForm(props) {
         <p>Método de entrega</p>
       </div>
 
-      {/* Dropdown para seleccionar Departamento */}
       <Form.Field>
         <label>Departamento</label>
         <Dropdown
@@ -139,10 +174,9 @@ export function DirectionForm(props) {
           onChange={handleDepartmentChange}
           value={formik.values.department}
           error={formik.errors.department}
-        />
+          />
       </Form.Field>
 
-      {/* Dropdown para seleccionar Municipio */}
       <Form.Field>
         <label>Municipio</label>
         <Dropdown
@@ -151,11 +185,11 @@ export function DirectionForm(props) {
           fluid
           selection
           options={municipalityOptions}
-          onChange={(e, { value }) => formik.setFieldValue('municipality', value)}
+          onChange={handleMunicipalityChange} // Actualiza aquí
           value={formik.values.municipality}
           error={formik.errors.municipality}
           disabled={municipalityDisabled}
-        />
+          />
       </Form.Field>
 
       <Form.Field>
@@ -166,7 +200,7 @@ export function DirectionForm(props) {
           onChange={formik.handleChange}
           value={formik.values.street}
           error={formik.errors.street}
-        />
+          />
       </Form.Field>
 
       <Form.Field>
@@ -177,7 +211,7 @@ export function DirectionForm(props) {
           onChange={formik.handleChange}
           value={formik.values.aditionalDescription}
           error={formik.errors.aditionalDescription}
-        />
+          />
       </Form.Field>
 
       <Form.Field>
@@ -196,11 +230,35 @@ export function DirectionForm(props) {
         fluid
         loading={formik.isSubmitting}
         style={{ backgroundColor: '#0ba69e', color: 'white' }}
-      >
+        >
         Pagar
       </Form.Button>
 
       {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} customization={{ texts: { valueProp: 'smart_option' } }} />}
     </Form>
+    ) : (
+      <Form onSubmit={formik.handleSubmit}>
+
+        <div className='map'>
+            {isLoaded && (
+              <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={18}>
+                <Marker position={center} /> 
+              </GoogleMap>
+            )}
+        </div>
+
+        <Form.Button
+        type="submit"
+        fluid
+        loading={formik.isSubmitting}
+        style={{ backgroundColor: '#0ba69e', color: 'white' }}
+        >
+        Pagar
+      </Form.Button>
+
+      {preferenceId && <Wallet initialization={{ preferenceId: preferenceId }} customization={{ texts: { valueProp: 'smart_option' } }} />}
+      </Form>
+    )}
+    </>
   );
 }

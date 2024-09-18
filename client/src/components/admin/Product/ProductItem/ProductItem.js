@@ -70,7 +70,7 @@ export function ProductItem(props) {
     <>
         <div className='course-item'>
             <div className="course-item__info">
-                <Image src={`${ENV.BASE_PATH}/${product.images}`} />
+                <Image src={product.images} />
                 <div>
                     <p>{product.name}</p>
                 </div>

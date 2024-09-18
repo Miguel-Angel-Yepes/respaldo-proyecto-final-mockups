@@ -8,17 +8,29 @@ export function CheckoutProductItem(props) {
   const {item} = props;
 
   const [quantity, setQuantity] = useState(item.quantity);
-  const subTotal = item.productId.price * quantity;
 
+  const discountedPrice = (discount, price) => {
+    const discountAmount = price * (discount / 100);
+    const Price = (price - discountAmount) * quantity;
+    const finalPrice =`$${Price.toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`;
+    return finalPrice;
+  };
 
   return (
     <div className={styles.itemContainer}>
-      <Image src={`${ENV.BASE_PATH}/${item.productId.images}`} />
+      <Image src={item.productId.images} />
       <div className={styles.itemContainerText}> 
         <h2 className={styles.itemContainerH}>{item.productId.name}</h2>
         <div className={styles.itemContainerP}>
           <p>{quantity}</p>
-          <p>$  {subTotal}</p>
+          {item.productId.discount ? (
+              <p > {discountedPrice(item.productId.cantDiscount, item.productId.price)}  </p>
+            ) : (
+            <p >{item.productId.price * quantity}</p>
+            )}
         </div>
       </div>
     </div>

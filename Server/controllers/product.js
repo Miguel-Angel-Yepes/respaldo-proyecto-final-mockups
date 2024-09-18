@@ -1,12 +1,17 @@
 import Product from '../models/product.js';
 import * as image from '../utils/image.js'; // Asegúrate de que `image.js` exporte las funciones necesarias
+import cloudinary from '../services/cloudinaryConfig.js';
 
 export async function createProduct(req, res) {
     const product = new Product(req.body);
 
     try {
-        const imagePath = image.getFilePath(req.files.images);
-        product.images = imagePath;
+        if (req.body.images) { // La imagen está en base64
+            const result = await cloudinary.uploader.upload(req.body.images, {
+                folder: 'products',
+            });
+            product.images = result.secure_url;
+        }
 
         const savedProduct = await product.save();
         if (!savedProduct) {

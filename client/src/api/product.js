@@ -55,18 +55,18 @@ export class Product {
             const formData = new FormData();
             Object.keys(data).forEach((key)=> {
                 formData.append(key, data[key])
-            })
-
+            });
+    
             if(data.stock === 0){
                 formData.append("active", false);
             } else{
                 formData.append("active", true);
             }
-
-
+    
             if(data.file){
                 formData.append("images", data.file);
             }
+    
             const url = `${this.baseApi}/${ENV.API_ROUTES.PRODUCT}`;
             const params = {
                 method: "POST",
@@ -75,16 +75,17 @@ export class Product {
                 },
                 body: formData,
             };
-
+    
             const response = await fetch(url, params);
             const result = await response.json();
-
+    
             if(response.status !== 200) throw result;
-
+    
             return result;
-
+    
         } catch (error) {
-            throw error
+            console.error("Error:", error); // Muestra el error completo en la consola
+            throw error;
         }
     }
 

@@ -2,6 +2,8 @@ import { model } from 'mongoose';
 import Appoinment from '../models/appoinment.js';
 import User from  '../models/user.js';
 import { sendEmail } from '../services/emailService.js';
+import { format } from 'date-fns';
+import { es } from 'date-fns/locale';
 
 export async function createAppoinment(req, res) {
     const { user_id } = req.user;
@@ -45,13 +47,16 @@ export async function createAppoinment(req, res) {
 
         const savedAppoinment = await appoinment.save();
 
+        // Formatear la fecha en español
+        const formattedDate = format(appointmentDate, "dd MMMM yyyy 'a las' HH:mm", { locale: es });
+
         // Enviar correo al administrador
         const emailContent = `
             <h1>Nueva Solicitud de cita</h1>
             <p><strong>Animal:</strong> ${animal}</p>
             <p><strong>Nombre de la Mascota:</strong> ${petName}</p>
             <p><strong>Tipo de Cita:</strong> ${appoinmentType}</p>
-            <p><strong>Fecha y Hora:</strong> ${appointmentDate}</p>
+            <p><strong>Fecha y Hora:</strong> ${formattedDate}</p>
             <p><strong>Descripción:</strong> ${description}</p>
         `;
 
@@ -68,6 +73,7 @@ export async function createAppoinment(req, res) {
         res.status(500).send({ msg: "Error al agendar la cita", error: error.message });
     }
 }
+
 
 export async function getAppoinment(req, res) {
     const { id } = req.params;
@@ -162,20 +168,21 @@ export const acceptAppoinment = async (req, res) => {
 
         const user = await User.findById(updatedAppoinment.user);
 
-        console.log(user);
-        
+
         // Verificar si el correo del usuario está disponible
         if (!updatedAppoinment || !updatedAppoinment.user || !updatedAppoinment.user.email) {
             console.log("No se encontró el correo del usuario.");
             return res.status(400).json({ message: 'No se encontró el correo del usuario.' });
         }
 
+        // Formatear la fecha en español y en formato de 24 horas
+        const formattedDate = format(new Date(updatedAppoinment.date), "dd MMMM yyyy 'a las' HH:mm", { locale: es });
 
         // Preparar el contenido del correo (puedes personalizar el HTML del correo)
         const emailContent = `
             <h1>Cita Aceptada</h1>
             <p>Estimado/a ${user.firstname},</p>
-            <p>Su cita ha sido aceptada. Nos vemos el día ${updatedAppoinment.date} para la ${updatedAppoinment.appoinmentType} de su mascota ${updatedAppoinment.petName}.</p>
+            <p>Su cita ha sido aceptada. Nos vemos el día ${formattedDate} para la ${updatedAppoinment.appoinmentType} de su mascota ${updatedAppoinment.petName}.</p>
             <p>Gracias por elegirnos.</p>
         `;
 
@@ -194,6 +201,7 @@ export const acceptAppoinment = async (req, res) => {
     }
 };
 
+
 export async function rejectAppoinment(req, res) {
     const { id } = req.params;
 
@@ -205,10 +213,13 @@ export async function rejectAppoinment(req, res) {
             return res.status(404).send({ msg: "No se encontró la cita" });
         }
 
+        // Formatear la fecha en español y en formato de 24 horas
+        const formattedDate = format(new Date(appoinmentToDelete.date), "dd MMMM yyyy 'a las' HH:mm", { locale: es });
+
         // Preparar el contenido del correo
         const emailContent = `
             <h1>Cita Rechazada</h1>
-            <p>Lamentamos informarle que su cita para el ${appoinmentToDelete.date} ha sido rechazada.</p>
+            <p>Lamentamos informarle que su cita para el ${formattedDate} ha sido rechazada.</p>
         `;
 
         // Enviar el correo al usuario
@@ -226,6 +237,7 @@ export async function rejectAppoinment(req, res) {
         res.status(500).send({ msg: "Error al rechazar la cita", error });
     }
 }
+
 
 export async function createAppoinmentByAdmin(req, res) {
     const { user_id } = req.user;
@@ -277,4 +289,3 @@ export async function createAppoinmentByAdmin(req, res) {
         res.status(500).send({ msg: "Error al agendar la cita" });
     }
 }
-

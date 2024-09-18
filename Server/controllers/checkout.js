@@ -13,7 +13,8 @@ export const addClientData = async (req, res) => {
         municipality,
         street,
         aditionalDescription,
-        neighborhood
+        neighborhood,
+        delivery
     } = req.body;
 
     try {
@@ -24,7 +25,8 @@ export const addClientData = async (req, res) => {
             checkout = new Checkout({
                 userId,
                 clientData: [{}],  // Inicializa con un objeto vacío
-                clientDirection: [{}]
+                clientDirection: [{}],
+                delivery: true
             });
         }
 
@@ -43,6 +45,10 @@ export const addClientData = async (req, res) => {
         if (street) clientDirection.street = street;
         if (aditionalDescription) clientDirection.aditionalDescription = aditionalDescription;
         if (neighborhood) clientDirection.neighborhood = neighborhood;
+
+        if (delivery !== undefined) {
+            checkout.delivery = delivery;
+        }
 
         // Guarda los datos actualizados
         checkout.clientData = [clientData];
@@ -68,6 +74,7 @@ export const removeClientData = async (req, res) => {
         // Eliminar datos del cliente y dirección
         checkout.clientData = [];
         checkout.clientDirection = [];
+        checkout.delivery = false;  
 
         await checkout.save();
         return res.status(200).json(checkout);
@@ -87,8 +94,9 @@ export const getClientData = async (req, res) => {
 
         const clientData = checkout.clientData;
         const clientDirection = checkout.clientDirection;
+        const delivery = checkout.delivery;
 
-        return res.status(200).json({ clientData, clientDirection });
+        return res.status(200).json({ clientData, clientDirection, delivery });
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }

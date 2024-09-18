@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { RegisterForm, LoginForm } from '../../../components/admin/Auth';
+import { RegisterForm, LoginFormAdmin } from '../../../components/admin/Auth';
 import './Auth.css';
 
 export function Auth() {
@@ -11,7 +11,7 @@ export function Auth() {
     <div className='auth'>      
       {showLogin ? (
         <>
-          <LoginForm openRegister={toggleForm}/>
+          <LoginFormAdmin openRegister={toggleForm}/>
         </>
       ) : (
         <>

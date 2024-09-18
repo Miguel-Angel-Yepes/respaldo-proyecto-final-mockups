@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { Tab, Button } from 'semantic-ui-react';
 import { BasicModal } from '../../../components/Shared/BasicModal';
 import { ListAppoinments, AppoinmentForm, AppoinmentHistory, AcceptedAppoinment } from '../../../components/admin/Appoinments';
-
 import styles from './Appoinments.module.css';
 
 export function Appoinments() {

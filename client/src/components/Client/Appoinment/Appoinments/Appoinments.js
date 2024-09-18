@@ -6,6 +6,7 @@ import styles from './Appoinments.module.css';
 import { animalOptions, appoinmentTypeOptions, dogSizeOptions, catSizeOptions, timeOptions } from '../../../../utils/Constants/dropdownOptions';
 import { Appoinment } from '../../../../api';
 import { useAuth } from '../../../../hooks';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const appoinmentController = new Appoinment();
 
@@ -13,7 +14,9 @@ export function Appoinments() {
   const [sizeOptions, setSizeOptions] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState('');
+  const [shouldRedirect, setShouldRedirect] = useState(false); // Estado para controlar la redirección
   const { accessToken } = useAuth();
+  const navigate = useNavigate(); // Define useNavigate
 
   const formik = useFormik({
     initialValues: initialValues(),
@@ -30,12 +33,13 @@ export function Appoinments() {
         await appoinmentController.createAppoinment(formValue, accessToken);
         setModalContent('Cita creada exitosamente. Será aceptada o denegada por el administrador.');
         setModalOpen(true);
+        setShouldRedirect(true); // Activar redirección después de crear la cita
         resetForm();
       } catch (error) {
         // Mostrar el mensaje de error específico en el modal
         setModalContent(`Error al crear la cita: ${error.message}`);
-        console.error(error); // Imprime el error en la consola
         setModalOpen(true);
+        setShouldRedirect(false); // No redirigir si hay un error
       }
     },
   });
@@ -45,6 +49,13 @@ export function Appoinments() {
     if (value === 'perro') setSizeOptions(dogSizeOptions);
     else if (value === 'gato') setSizeOptions(catSizeOptions);
     else setSizeOptions([]);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    if (shouldRedirect) {
+      navigate('/'); // Redirige solo si se creó la cita exitosamente
+    }
   };
 
   return (
@@ -147,7 +158,7 @@ export function Appoinments() {
       {/* Modal for success or error messages */}
       <Modal
         open={modalOpen}
-        onClose={() => setModalOpen(false)}
+        onClose={closeModal} // Usar la función que redirige condicionalmente
         size="small"
       >
         <Modal.Header>Información</Modal.Header>
@@ -155,7 +166,7 @@ export function Appoinments() {
           <p>{modalContent}</p>
         </Modal.Content>
         <Modal.Actions>
-          <Button onClick={() => setModalOpen(false)} color="green">
+          <Button onClick={closeModal} color="green">
             Aceptar
           </Button>
         </Modal.Actions>

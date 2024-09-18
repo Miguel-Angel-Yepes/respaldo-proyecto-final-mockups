@@ -18,7 +18,7 @@ const productController = new ProductClass();
 
 export function Product() {
   const location = useLocation();
-  const { productId } = location.state || {};  
+  const { productId } = location.state || {};
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const { user } = useAuth();
@@ -28,6 +28,7 @@ export function Product() {
   const [zIndex, setZIndex] = useState(-1);
   const [showLogin, setShowLogin] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
+  const [showModal, setShowModal] = useState(false); // Estado para el modal de advertencia
 
   const onOpenCloseLogin = () => setShowLogin((prevState) => !prevState);
   const toggleForm = () => setIsLogin(!isLogin);
@@ -38,13 +39,14 @@ export function Product() {
 
   const onReloadCart = () => setReloadCart((prevState) => !prevState);
 
+  const openModal = () => setShowModal(true); // Función para abrir el modal de advertencia
+  const closeModal = () => setShowModal(false); // Función para cerrar el modal de advertencia
+
   useEffect(() => {
     (async () => {
       try {
         const response = await cartController.getCart(user._id);
-        setCartContent(response);   
-        console.log(cartContent);
-             
+        setCartContent(response);
       } catch (error) {
         console.error(error);
       }
@@ -59,7 +61,7 @@ export function Product() {
       setTimeout(() => {
         setZIndex(-1);
       }, 500);
-    }   
+    }
   }, [showCart, reloadCart]);
 
   useEffect(() => {
@@ -93,42 +95,55 @@ export function Product() {
     try {
       let cart;
       let existingQuantity = 0;
-  
+
+      // Obtener el carrito actual
       try {
-        // Intenta obtener el carrito del usuario
         cart = await cartController.getCart(user._id);
       } catch (error) {
-        // Si no existe un carrito para el usuario, el error se captura aquí
         console.log("No se encontró un carrito existente. Creando uno nuevo.");
       }
-  
-      // Si se encontró el carrito, verifica si el producto ya está en él
+
+      // Si el producto ya está en el carrito, obtener la cantidad existente
       if (cart && cart.items.length > 0) {
         const existingItem = cart.items.find(item => item.productId === productId);
         if (existingItem) {
           existingQuantity = existingItem.quantity;
         }
       }
-  
-      // Calcula la nueva cantidad
-      const newQuantity = existingQuantity + quantity;
-  
-      // Actualiza la cantidad en el carrito si el producto ya existe
+
+      // Nueva cantidad total (en el carrito más lo que se está agregando)
+      const totalQuantity = existingQuantity + quantity;
+
+      // Validar si la cantidad total excede el stock disponible
+      if (totalQuantity > product.stock) {
+        openModal(); // Abrir modal de advertencia
+        return;
+      }
+
+      // Si la cantidad no excede el stock, agregar o actualizar el producto en el carrito
       if (existingQuantity > 0) {
-        await cartController.updateCartQuantity(user._id, productId, newQuantity);
+        await cartController.updateCartQuantity(user._id, productId, totalQuantity);
       } else {
-        // Si no hay carrito o el producto no estaba en el carrito, agrégalo
         await cartController.addToCart(user._id, productId, quantity);
       }
-  
-      // Actualiza el carrito y abre el carrito
+
+      // Recargar el carrito y abrir el carrito
       onReloadCart();
       onOpenCloseCart();
     } catch (error) {
       console.error("Error al agregar el producto al carrito:", error);
     }
   };
-  
+
+  const discountedPrice = (discount, price) => {
+    const discountAmount = price * (discount / 100);
+    const Price = price - discountAmount;
+    const finalPrice =`$${Price.toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    })}`;
+    return finalPrice;
+  };
 
   return (
     <>
@@ -144,12 +159,15 @@ export function Product() {
           style={{backgroundColor: "#cccdce"}}
         >
           <div className={styles2.modalCartHeader}>
+              <p className={styles2.modalCartHeaderFirstP}>
+              {cartContent ? cartContent.items.reduce((total, item) => total + item.quantity, 0) : 0}
+              </p>
             <div>
-              <Icon name="cart" size="big" id={styles.icon}  />
+              <Icon name="cart" size="big" />
               <p>Carrito de compras</p>
             </div>
 
-            <Icon name="close" size="big" onClick={onOpenCloseCart} style={{ cursor: "pointer" }} />
+            <Icon className={styles.closeIconNavCart} name="close" size="big" onClick={onOpenCloseCart} style={{ cursor: "pointer" }} />
           </div>
 
           <div className={styles2.cartItemContainer}>
@@ -184,19 +202,26 @@ export function Product() {
           className={`filter__button__product`}
           id={styles.carrito}
           size="big"
-          onClick={user?onOpenCloseCart:onOpenCloseLogin}
-
+          onClick={user ? onOpenCloseCart : onOpenCloseLogin}
         >
           <Icon name="cart" size="big" />
           <> </> <span>Carrito de compras</span>
         </Button>
 
         <Card className={styles.productCard}>
-          <Image className={styles.productImage} src={`${ENV.BASE_PATH}/${product.images}`} />
+          <Image className={styles.productImage} src={product.images} />
         </Card>
         <div className={styles.productInfo}>
           <p className={styles.productTitle}>{product.name}</p>
-          <p>{formattedPrice}</p>
+          <p className={styles.productP}>{product.info}</p>
+          {product.discount ? (
+            <>
+              <p className={styles.priceWithDiscount}> {formattedPrice} </p>
+              <p>{discountedPrice(product.cantDiscount, product.price)}</p>
+            </>
+          ) : (
+            <p>{formattedPrice}</p>
+          )}
           <p>Seleccione la cantidad:</p>
 
           <div className={styles.quantitySelector}>
@@ -214,26 +239,38 @@ export function Product() {
               <FontAwesomeIcon icon={faPlus} />
             </button>
           </div>
-          <Button className={styles.addToCartButton} onClick={user?handleAddToCart:onOpenCloseLogin}>
+          <Button className={styles.addToCartButton} onClick={user ? handleAddToCart : onOpenCloseLogin}>
             <FontAwesomeIcon icon={faShoppingCart} /> Agregar al carrito
           </Button>
         </div>
       </div>
 
-      <Modal closeIcon open={showLogin} onClose={onOpenCloseLogin} className={styles.modal}>
-        <Modal.Content className={styles.modalContent}>
+      <Modal open={showModal} onClose={closeModal} size="small">
+        <Modal.Header>Advertencia</Modal.Header>
+        <Modal.Content>
+          <p>No puedes agregar más de {product.stock} unidades de este producto.</p>
+        </Modal.Content>
+        <Modal.Actions>
+          <Button onClick={closeModal}>Cerrar</Button>
+        </Modal.Actions>
+      </Modal>
+
+      <Modal open={showLogin} onClose={onOpenCloseLogin}>
+        <Modal.Content>
           {isLogin ? (
-            <LoginForm
-              openRegister={toggleForm}
-              onOpenCloseLogin={onOpenCloseLogin}
-            />
+            <LoginForm onOpenCloseLogin={onOpenCloseLogin} />
           ) : (
-            <RegisterForm
-              openLogin={toggleForm}
-              onOpenCloseLogin={onOpenCloseLogin}
-            />
+            <RegisterForm onOpenCloseLogin={onOpenCloseLogin} />
           )}
         </Modal.Content>
+        <Modal.Actions>
+          <div className={styles.loginActions}>
+            <p>
+              {isLogin ? "¿Aún no tienes cuenta?" : "¿Ya tienes cuenta?"}
+              <span onClick={toggleForm}>{isLogin ? " Regístrate" : " Inicia sesión"}</span>
+            </p>
+          </div>
+        </Modal.Actions>
       </Modal>
     </>
   );

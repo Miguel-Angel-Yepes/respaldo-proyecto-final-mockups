@@ -32,7 +32,13 @@ export const addToCart = async (req, res) => {
         let total = 0;
         for (const item of cart.items) {
             const product = await Product.findById(item.productId);
-            total += item.quantity * product.price;
+            if(product.discount){
+                const discountAmount = product.price * (product.cantDiscount / 100);
+                const Price = product.price - discountAmount;
+                total += item.quantity * Price;
+            } else{
+                total += item.quantity * product.price;
+            }
         }
         cart.total = total;
 
@@ -110,7 +116,16 @@ export const updateCartQuantity = async (req, res) => {
             let total = 0;
             for (const item of cart.items) {
                 const product = await Product.findById(item.productId);
-                total += item.quantity * product.price;
+                if(product.discount){
+                    const discountAmount = product.price * (product.cantDiscount / 100);
+                    const Price = product.price - discountAmount;
+                    console.log(Price);
+                    
+                    total += item.quantity * Price;
+                    
+                } else{
+                    total += item.quantity * product.price;
+                }
             }
             cart.total = total;
 
@@ -124,4 +139,4 @@ export const updateCartQuantity = async (req, res) => {
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
-};
+};  
