@@ -1,28 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../../../hooks';
-import { Cart } from '../../../../api';
+import { PostCheckout, Checkout } from '../../../../api';
 import { PostCheckoutCartItem } from '../PostCheckoutCartItem';
 import styles from './CartData.module.css';
 
-const cartController = new Cart();
+const postCheckoutController = new PostCheckout();
+const checkoutController = new Checkout();
 
-export function CartData() {
+export function CartData(props) {
   const { user } = useAuth();
-  const [cartContent, setCartContent] = useState(null); // Inicializar como null para manejar estado de carga
+  const {cartContent, setCartContent, deliveryCost, setDeliveryCost} = props;
 
   useEffect(() => {
     (async () => {
       try {
         if (user && user._id) { // Verificar que user y user._id existen antes de hacer la llamada
-          const response = await cartController.getCart(user._id);
-          setCartContent(response);
+          
+          const response = await postCheckoutController.postCheckout(user._id);
+          const checkoutResponse = await checkoutController.getCheckout(user._id);
 
-          if (response && response.items.length > 0) {
-            // Aquí llamas a la función removeCart correctamente
-            for (const item of response.items) {
-              await cartController.removeCart(user._id, item._id);
-            }
-          }
+          setCartContent(response.cart); // Aquí asignas los datos del carrito recibidos
+          setDeliveryCost(checkoutResponse.deliveryCost);
+          console.log();
+          
         }
       } catch (error) {
         console.error(error);
@@ -41,10 +41,32 @@ export function CartData() {
   }
 
   return (
-    <div>
-      {cartContent.items.map((item) => (
-        <PostCheckoutCartItem key={item._id} item={item} />
-      ))}
+    <div className={styles.checkouProducts}>
+      <h2>Resumen de tu orden</h2>
+
+      <div>
+        {cartContent.items.map((item) => (
+          <PostCheckoutCartItem key={item._id} item={item} />
+        ))}
+      </div>
+
+      <h2>Resumen de la compra</h2>
+
+      <div className={styles.checkouProductsChildren}>
+        <p>Subtotal</p>
+        <p>$ {cartContent.total ? cartContent.total : '0'}</p>
+      </div>
+
+      <div className={styles.checkouProductsChildren}>
+        <p>Gastos de envío</p>
+        <p>$ {deliveryCost}</p>
+      </div>
+
+      <div className={styles.checkouProductsChildren}>
+        <h2>Total</h2>
+        <p>${cartContent.total ? cartContent.total + deliveryCost : '0'}</p>
+      </div>
     </div>
+    
   );
 }

@@ -9,7 +9,7 @@ const checkoutController = new Checkout();
 
 export function CheckoutData(props) {
   
-  const { handleDeliveryState, setDeliveryMunicipality, deliveryState } = props;
+  const { handleDeliveryState, setDeliveryMunicipality, deliveryState, deliveryMunicipality } = props;
   const { user } = useAuth();
   const [isClient, setIsClient] = useState(true);
 
@@ -36,7 +36,7 @@ export function CheckoutData(props) {
     {isClient ? (
         <ClientForm clientData={clientData} toggleClient={toggleClient} />
       ) : (
-        <DirectionForm directionData={directionData} handleDeliveryState={handleDeliveryState} setDeliveryMunicipality={setDeliveryMunicipality} deliveryState={deliveryState} />
+        <DirectionForm directionData={directionData} handleDeliveryState={handleDeliveryState}  deliveryMunicipality={deliveryMunicipality} setDeliveryMunicipality={setDeliveryMunicipality} deliveryState={deliveryState} />
       )}
     </div>
   )

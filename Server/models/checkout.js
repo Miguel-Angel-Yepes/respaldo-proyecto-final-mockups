@@ -31,6 +31,7 @@ const CheckoutSchema = new mongoose.Schema({
     clientData: [ClientDataSchema],
     clientDirection: [ClientDirectionSchema],
     delivery: Boolean,
+    deliveryCost: Number,
 });
 
 export default mongoose.model('Checkout', CheckoutSchema);

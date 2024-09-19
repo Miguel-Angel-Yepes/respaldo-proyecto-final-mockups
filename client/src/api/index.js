@@ -5,3 +5,4 @@ export * from './cart';
 export * from './appoinment';
 export * from './checkout';
 export * from './preference';
+export * from './postCheckout';

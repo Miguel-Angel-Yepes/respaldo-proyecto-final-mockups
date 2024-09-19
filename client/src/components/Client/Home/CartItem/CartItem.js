@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Image, Icon, Input, Modal, Button } from 'semantic-ui-react';
-import { ENV } from '../../../../utils';
 import { Cart } from '../../../../api';
 import { useAuth } from '../../../../hooks';
 import { useNavigate } from 'react-router-dom';   
@@ -73,8 +72,6 @@ export function CartItem(props) {
       discount / 100);
       const Price = (price - discountAmount) * quantity;
       const finalPrice = `$${Price.toLocaleString('en-US', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
       })}`;
       return finalPrice;
     };

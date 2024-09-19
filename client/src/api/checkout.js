@@ -17,7 +17,6 @@ export class Checkout {
         } catch (error) {
             throw error
         }
-
         
     }
 

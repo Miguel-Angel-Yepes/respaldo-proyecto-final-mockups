@@ -8,4 +8,19 @@
     button.svelte-h6o0kp.svelte-h6o0kp{
         min-width: 180px !important;
     }
+
+    .ui.button{
+        font-size: 12px !important;
+        min-width: 10px !important;
+
+    }
   }
+
+
+  .selected-button{
+    background-color: #009688 !important;
+    color: white !important;
+    border-color: #009688 !important;
+    
+  }
+

@@ -26,7 +26,7 @@
 }
 
 .itemDetails h2 {
-    font-size: 16px;
+    font-size: clamp(0.8rem, 2vw, 1rem);
     margin-bottom: 10px;
 }
 
@@ -37,12 +37,12 @@
 }
 
 .priceInputContainer p {
-    font-size: 16px;
+    font-size: clamp(0.8rem, 2vw, 1rem);
     margin: 0;
 }
 
 .priceInputContainer input {
-    width: 70px; /* Tamaño del input */
+    width: 50px; /* Tamaño del input */
     text-align: center;
     padding: 5px;
 }

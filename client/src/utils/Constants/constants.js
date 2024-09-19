@@ -17,6 +17,7 @@ export const ENV = {
         APPOINMENT: "appoinment",
         CHECKOUT: "checkout",
         PREFERENCE: "create_preference",
+        POST_CHECKOUT: "post-checkout"
     },
     JWT: {
         ACCESS: "access",

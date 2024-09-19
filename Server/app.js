@@ -36,7 +36,7 @@ app.post(`/api/${API_VERSION}/create_preference`, async(req, res) => {
             },
             auto_return: "approved",
             shipments: {
-                cost: 500,  // Costo de envío
+                cost: 0,  // Costo de envío
                 mode: 'not_specified' // Puedes cambiar el modo según la integración
             }
         };

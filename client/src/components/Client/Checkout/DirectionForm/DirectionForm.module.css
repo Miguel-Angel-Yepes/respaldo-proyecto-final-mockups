@@ -35,3 +35,154 @@
     width: 100% !important;
 }
 
+.mapContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items:center;
+  }
+  
+  .imageContainer {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .mapImage {
+    width: 300% ; 
+    height: 300%;
+    margin-bottom: 10px;
+  }
+  
+  .mapButton {
+    background-color: transparent !important; 
+    border: 2px solid #009688 !important;
+    color: #009688 !important;
+    border-radius: 20px !important;
+    padding: 10px 20px !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s, color 0.3s !important;
+  }
+  
+  .mapButton:hover {
+    background-color: #009688 !important;
+    color: white !important;
+  }
+
+  .mapContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items:center;
+  }
+  
+  .imageContainer {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .mapImage {
+    width: 300% ; 
+    height: 300%;
+    margin-bottom: 10px;
+  }
+  
+  .mapButton {
+    background-color: transparent !important; 
+    border: 2px solid #009688 !important;
+    color: #009688 !important;
+    border-radius: 20px !important;
+    padding: 10px 20px !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s, color 0.3s !important;
+  }
+  
+  .mapButton:hover {
+    background-color: #009688 !important;
+    color: white !important;
+  }
+  
+
+  .mapContainer {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+  }
+  
+  .imageContainer {
+    position: relative;
+    width: 45%;
+    cursor: pointer;
+  }
+  
+  .mapImage {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+  }
+  
+  .mapImage:hover {
+    transform: scale(1.05);
+  }
+  
+  .hoverText {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    display: none;
+  }
+  
+  .imageContainer:hover .hoverText {
+    display: block;
+  }
+
+  /* DirectionForm.module.css */
+
+
+.mapContainer {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px 0;
+}
+
+.imageContainer {
+  position: relative;
+  width: 45%;
+  cursor: pointer;
+}
+
+.mapImage {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.mapImage:hover {
+  transform: scale(1.05);
+}
+
+.hoverText {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  display: none;
+}
+
+.imageContainer:hover .hoverText {
+  display: block;
+}

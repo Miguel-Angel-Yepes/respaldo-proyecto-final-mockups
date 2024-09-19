@@ -11,7 +11,7 @@ export function Checkout() {
 
   return (
     <div className={styles.checkoutPage}>
-      <CheckoutData deliveryState={deliveryState} handleDeliveryState={handleDeliveryState} setDeliveryMunicipality={setDeliveryMunicipality} />
+      <CheckoutData deliveryState={deliveryState} handleDeliveryState={handleDeliveryState} setDeliveryMunicipality={setDeliveryMunicipality} deliveryMunicipality={deliveryMunicipality} />
       <CheckoutProducts deliveryState={deliveryState} setDeliveryMunicipality={setDeliveryMunicipality} deliveryMunicipality={deliveryMunicipality} />
     </div>
   )
