@@ -1,7 +1,62 @@
 const SERVER_IP = "https://backservimascotas.onrender.com";
 
 export const ENV = {
-    BASE_PATH: `${SERVER_IP}`,
+    BASE_PATH: `.
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    ${SERVER_IP}`,
     BASE_API: `${SERVER_IP}/api/v1`,
     API_ROUTES: {
         REGISTER: "auth/register",
